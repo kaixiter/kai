@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add User</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 flex justify-center items-center min-h-screen p-4">
+  <div class="w-full max-w-md bg-white p-6 rounded shadow">
+    <h2 class="text-xl font-bold text-center mb-4">Add New User</h2>
+    <form id="addUserForm" class="space-y-4">
+      <input
+        type="text"
+        id="newUsername"
+        placeholder="New Username"
+        required
+        class="w-full border border-gray-400 p-2"
+      />
+      <input
+        type="password"
+        id="newPassword"
+        placeholder="New Password"
+        required
+        class="w-full border border-gray-400 p-2"
+      />
+      <button
+        type="submit"
+        class="w-full bg-blue-600 text-white font-bold py-2 hover:bg-blue-700"
+      >
+        Add User
+      </button>
+    </form>
+    <a href="index.html" class="block mt-4 text-center text-blue-600 underline">Back to Login</a>
+  </div>
+
+  <script>
+    document.getElementById("addUserForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.getElementById("newUsername").value;
+      const password = document.getElementById("newPassword").value;
+
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      users.push({ username, password });
+      localStorage.setItem("users", JSON.stringify(users));
+
+      alert("User added!");
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>

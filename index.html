@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel Kai</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="bg-black flex justify-center items-center min-h-screen p-4">
+  <div id="panel" class="fade-in w-full max-w-md border-4 border-black bg-white">
+    <div class="border-b-4 border-black text-center font-bold py-3">
+      WELCOME TO PANEL KAI
+    </div>
+    <form id="loginForm" class="space-y-4 p-4">
+      <label class="flex items-center font-bold border-b border-gray-400 pb-2">
+        <span class="mr-2">Username:</span>
+        <input
+          id="username"
+          type="text"
+          placeholder="username"
+          required
+          class="flex-1 border-none outline-none text-blue-600 underline decoration-blue-600 bg-white"
+        />
+      </label>
+      <label class="flex items-center font-bold bg-white py-4">
+        <span class="mr-2">Password:</span>
+        <input
+          id="password"
+          type="password"
+          placeholder="password"
+          required
+          class="flex-1 border-none outline-none text-blue-600 underline decoration-blue-600 bg-white"
+        />
+      </label>
+      <button
+        type="submit"
+        class="w-full bg-red-600 text-black font-bold italic py-4 border-t-4 border-black hover:bg-red-700 transition"
+      >
+        Login
+      </button>
+    </form>
+    <a href="add-user.html" class="block text-center text-blue-500 py-2 underline">Add User</a>
+  </div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("panel").classList.add("show");
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const userFound = users.find(u => u.username === username && u.password === password);
+
+      if (userFound) {
+        window.location.href = "injector.html";
+      } else {
+        alert("Invalid username or password.");
+      }
+    });
+  </script>
+</body>
+</html>
